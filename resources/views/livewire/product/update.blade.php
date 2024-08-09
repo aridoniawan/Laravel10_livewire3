@@ -2,11 +2,11 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-body">
-                <form wire:submit="store" method="POST" enctype="multipart/form-data">
+                <form wire:submit="update" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <div class="form-row">
-                            <legend>Insert Product</legend>
+                            <legend>Update Product</legend>
                             <br>
                             <div class="col">
                               <input wire:model="title" type="text" class="form-control @error('title') is-invalid @enderror" placeholder="Title">
@@ -56,7 +56,10 @@
 
                                   @if ($image)
                                       <img src="{{ $image->temporaryUrl() }}" alt="" height="200">
+                                      @else
+                                      <img src="{{ $imageOld }}" alt="" height="200">
                                   @endif
+                                  
                                 </div>
                             </div>
                         </div>

@@ -10,6 +10,9 @@
     @if ($formVisible)
         @livewire('product.create')
     @endif
+    @if ($formUpdate)
+        @livewire('product.update')
+    @endif
     
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -54,7 +57,7 @@
                                     <td>{{ $product->title }}</td>
                                     <td>Rp{{ number_format($product->price,2,",",".") }}</td>
                                     <td>
-                                        <button class="btn btn-sm btn-info text-white">Edit</button>
+                                        <button wire:click="updateProduct({{ $product->id }})" class="btn btn-sm btn-info text-white">Edit</button>
                                         <button class="btn btn-sm btn-danger">Delete</button>
                                     </td>
                                 </tr>
