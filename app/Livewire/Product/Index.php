@@ -3,6 +3,7 @@
 namespace App\Livewire\Product;
 
 use App\Models\Products;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -18,8 +19,18 @@ class Index extends Component
     protected $listeners = [
         'ProductStored' => 'ProductStoredHandler',
         'formClose' => 'formCloseHandler',
-        'productUpdated' => 'productUpdatedHandler',
+        'ProductUpdated' => 'productUpdatedHandler',
     ];
+
+    public function deleteProduct($productId){
+        $product = Products::find($productId);
+
+        if($product->image){
+            Storage::disk('public')->delete($product->image);
+        }
+        $product->delete();
+        session()->flash('message', 'Product Deleted Successfully');
+    }
 
     public function productUpdatedHandler(){
         $this->formUpdate = false;
